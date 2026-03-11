@@ -14,7 +14,7 @@ public class OpenApiConfig {
 	OpenAPI serviceCatalogOpenApi() {
 		return new OpenAPI()
 			.info(new Info()
-				.title("JSB Service Catalog API")
+				.title("JSB Service Catalogs API")
 				.description("Example Spring Boot API documented with Swagger UI")
 				.version("v1")
 				.contact(new Contact()
