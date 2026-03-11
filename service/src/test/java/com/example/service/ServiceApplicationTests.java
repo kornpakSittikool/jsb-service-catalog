@@ -31,8 +31,19 @@ class ServiceApplicationTests {
 			.andExpect(status().isOk())
 			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
 			.andExpect(jsonPath("$.openapi").value("3.1.0"))
-			.andExpect(jsonPath("$.info.title").value("JSB Service Catalog API"))
-			.andExpect(jsonPath("$.info.version").value("v1"));
+			.andExpect(jsonPath("$.info.title").value("JSB Service Catalogs API"))
+			.andExpect(jsonPath("$.info.version").value("v1"))
+			.andExpect(jsonPath("$.paths['/todo/']").exists());
+	}
+
+	@Test
+	void todoEndpointReturnsJsonFromService() throws Exception {
+		mockMvc.perform(get("/todo/").param("param", "demo"))
+			.andExpect(status().isOk())
+			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+			.andExpect(jsonPath("$.message").value("success"))
+			.andExpect(jsonPath("$.param").value("demo"))
+			.andExpect(jsonPath("$.items[0]").value("task-1"));
 	}
 
 	@Test
